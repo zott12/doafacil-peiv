@@ -49,46 +49,4 @@ Repositório da disciplina **Prática Extensionista IV**.
 ### Diagrama DevOps
 ![Diagrama DevOps](doc/diagramas/devops.png)
 
-## Estrutura do repositório
 
-```
-.
-├── .github/
-│   ├── workflows/ci.yml        # integração contínua (lint, testes, build)
-│   ├── workflows/cd.yml        # entrega contínua (staging → aprovação → produção)
-│   └── dependabot.yml
-├── app/
-│   ├── frontend/               # SPA React + Vite
-│   │   └── src/{routes,pages,components,contexts,services,utils}
-│   └── backend/                # API REST Node.js + Express
-│       ├── prisma/schema.prisma
-│       └── src/{routes,middlewares,controllers,services,integrations,repositories,config}
-└── doc/
-    ├── diagramas/              # PNG + SVG dos diagramas
-    ├── arquitetura.md
-    └── infraestrutura.md
-```
-
-## Como executar localmente
-
-```bash
-# Backend
-cd app/backend
-cp .env.example .env          # ajuste DATABASE_URL e JWT_SECRET
-npm install
-npx prisma migrate dev
-npm run dev                   # http://localhost:8080/api/health
-
-# Frontend (outro terminal)
-cd app/frontend
-cp .env.example .env
-npm install
-npm run dev                   # http://localhost:5173
-```
-
-## Fluxo de trabalho (Git)
-
-- `main` → produção (protegida, merge somente via Pull Request aprovado e CI verde)
-- `develop` → homologação
-- `feature/<nome>` → novas funcionalidades
-- Commits no padrão *Conventional Commits* (`feat:`, `fix:`, `docs:` …)
